@@ -1,6 +1,9 @@
-snap remove google-cloud-sdk
-snap install google-cloud-cli --classic
-gcloud init --project=tranglanguage-backup --skip-diagnostics
+GCP_CLI_EXISTS=$(snap list | grep -c google-cloud-cli)
+if [[ $GCP_CLI_EXISTS == 0 ]]; then
+  snap remove google-cloud-sdk
+  snap install google-cloud-cli --classic
+  gcloud init --project=tranglanguage-backup --skip-diagnostics
+fi
 
 FILEPATH=gs://btwrdn-backup/$1
 gcloud storage ls $FILEPATH
