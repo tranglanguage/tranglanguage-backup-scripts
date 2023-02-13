@@ -30,4 +30,4 @@ crontab -l | { cat; echo "0 1,9,17 * * * $(pwd)/backup-bitwarden.sh >/dev/null 2
 
 rm $1
 rm get-docker.sh
-rm -- "$0"
+rm restore-bitwarden.sh
