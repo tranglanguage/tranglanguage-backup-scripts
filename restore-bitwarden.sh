@@ -14,6 +14,9 @@ if [[ $FILE_EXISTS == 1 ]]; then
   exit 1
 fi
 
+DIR=$( dirname -- $0; )
+cd $DIR
+
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 curl -Lso bitwarden.sh https://go.btwrdn.co/bw-sh && chmod 700 bitwarden.sh
