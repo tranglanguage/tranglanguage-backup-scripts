@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Restoring bwdata from $1"
+echo "Restoring bwdata from $1..."
 GCP_CLI_EXISTS=$(snap list | grep -c google-cloud-cli)
 if [[ $GCP_CLI_EXISTS == 0 ]]; then
   echo "Installing gcloud..."
