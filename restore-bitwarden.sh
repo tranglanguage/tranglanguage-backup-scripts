@@ -1,6 +1,8 @@
 #!/bin/bash
+echo "Restoring bwdata from $1"
 GCP_CLI_EXISTS=$(snap list | grep -c google-cloud-cli)
 if [[ $GCP_CLI_EXISTS == 0 ]]; then
+  echo "Installing gcloud..."
   snap remove google-cloud-sdk
   snap install google-cloud-cli --classic
   gcloud init --project=tranglanguage-backup --skip-diagnostics
@@ -18,8 +20,8 @@ fi
 DIR=$( dirname -- $0; )
 cd $DIR
 
-if [ -x "$(command -v docker)" ]; then
-else
+if ! [[ -x "$(command -v docker)" ]]; then
+    echo "Installing docker..."
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
 fi
@@ -33,5 +35,5 @@ systemctl enable cron
 crontab -l | { cat; echo "0 1,9,17 * * * $(pwd)/backup-bitwarden.sh >/dev/null 2>&1"; } | crontab -
 
 rm $1
-rm get-docker.sh
+rm -f get-docker.sh
 rm restore-bitwarden.sh
