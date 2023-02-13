@@ -18,8 +18,12 @@ fi
 DIR=$( dirname -- $0; )
 cd $DIR
 
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
+if [ -x "$(command -v docker)" ]; then
+else
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+fi
+
 curl -Lso bitwarden.sh https://go.btwrdn.co/bw-sh && chmod 700 bitwarden.sh
 gcloud storage cp $FILEPATH $1
 unzip $1
