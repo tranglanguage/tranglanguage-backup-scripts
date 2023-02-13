@@ -1,3 +1,4 @@
+#!/bin/bash
 GCP_CLI_EXISTS=$(snap list | grep -c google-cloud-cli)
 if [[ $GCP_CLI_EXISTS == 0 ]]; then
   snap remove google-cloud-sdk
