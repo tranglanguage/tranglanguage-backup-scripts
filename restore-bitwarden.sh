@@ -20,4 +20,7 @@ unzip $1
 
 systemctl enable cron
 crontab -l | { cat; echo "0 1,9,17 * * * $(pwd)/backup-bitwarden.sh >/dev/null 2>&1"; } | crontab -
+
+rm $1
+rm get-docker.sh
 rm -- "$0"
