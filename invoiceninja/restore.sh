@@ -9,8 +9,6 @@ git init
 git remote add origin https://github.com/invoiceninja/dockerfiles.git
 git pull
 git checkout master -f
-chmod 755 docker/app/public
-sudo chown -R 1500:1500 docker/app
 
 GCP_CLI_EXISTS=$(snap list | grep -c google-cloud-cli)
 if [[ $GCP_CLI_EXISTS == 0 ]]; then
@@ -40,6 +38,11 @@ fi
 echo "Downloading backup file $1 from GCP..."
 gcloud storage cp $FILEPATH $1
 unzip -o $1
+
+echo "Chmodding unzipped files from $1..."
+chmod 755 docker/app/public
+sudo chown -R 1500:1500 docker/app
+
 docker compose up -d
 
 echo "Enabling cronjob for future backup..."
