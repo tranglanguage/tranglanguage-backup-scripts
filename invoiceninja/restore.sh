@@ -5,7 +5,10 @@ DIR=$( dirname -- $0; )
 cd $DIR
 
 echo "Cloning invoiceninja from github..."
-git clone https://github.com/invoiceninja/dockerfiles.git .
+git init
+git remote add origin https://github.com/invoiceninja/dockerfiles.git
+git pull
+git checkout master -f
 chmod 755 docker/app/public
 sudo chown -R 1500:1500 docker/app
 
